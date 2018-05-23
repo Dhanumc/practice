@@ -1,0 +1,1548 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20180523 15:59:58.735" generator="Robot 3.0.4 (Python 2.7.12 on linux2)">
+<suite source="/home/dhanu/CR-Onboarding/testing/Onboarding.robot" id="s1" name="Onboarding">
+<test id="s1-t1" name="Testing users Intake">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20180523 15:59:58.872" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20180523 15:59:58.873" starttime="20180523 15:59:58.870"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>intake</arg>
+<arg>${url}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<msg timestamp="20180523 15:59:58.874" level="INFO">Creating Session using : alias=intake, url=http://54.186.254.137:6060, headers={u'Content-Type': u'application/json'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20180523 15:59:58.875" starttime="20180523 15:59:58.873"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>json.load(open("intake.json", "r"))</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${object}</var>
+</assign>
+<msg timestamp="20180523 15:59:58.877" level="INFO">${object} = {u'brandWinchester': {u'sell': False, u'buy': False}, u'emailId': u'rc@r.com', u'compProjectile': {u'sell': False, u'buy': True}, u'ammoRifle': {u'sell': True, u'buy': False}, u'saletermLt30days': {u'...</msg>
+<status status="PASS" endtime="20180523 15:59:58.878" starttime="20180523 15:59:58.876"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>intake</arg>
+<arg>/users/intake</arg>
+<arg>data=${object}</arg>
+</arguments>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20180523 15:59:59.749" level="INFO">Post Request using : alias=intake, uri=/users/intake, data=&lt;empty&gt;, headers=None, files=None, allow_redirects=True </msg>
+<msg timestamp="20180523 15:59:59.749" level="INFO">${result} = &lt;Response [403]&gt;</msg>
+<status status="PASS" endtime="20180523 15:59:59.749" starttime="20180523 15:59:58.881"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${result.status_code}</arg>
+<arg>${200}</arg>
+</arguments>
+<msg timestamp="20180523 15:59:59.751" level="FAIL">403 != 200</msg>
+<status status="FAIL" endtime="20180523 15:59:59.751" starttime="20180523 15:59:59.750"></status>
+</kw>
+<tags>
+<tag>intake</tag>
+</tags>
+<status status="FAIL" endtime="20180523 15:59:59.752" critical="yes" starttime="20180523 15:59:58.869">403 != 200</status>
+</test>
+<test id="s1-t2" name="Testing users Account">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20180523 15:59:59.756" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20180523 15:59:59.756" starttime="20180523 15:59:59.754"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>account</arg>
+<arg>${url}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<msg timestamp="20180523 15:59:59.757" level="INFO">Creating Session using : alias=account, url=http://54.186.254.137:6060, headers={u'Content-Type': u'application/json'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20180523 15:59:59.758" starttime="20180523 15:59:59.756"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>json.load(open("account.json", "r"))</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${object}</var>
+</assign>
+<msg timestamp="20180523 15:59:59.758" level="INFO">${object} = {u'userName': u'rc@r.com', u'phoneCode': u'+1', u'password': u'!@#123QW', u'phoneNumber': u'9879879879'}</msg>
+<status status="PASS" endtime="20180523 15:59:59.759" starttime="20180523 15:59:59.758"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>account</arg>
+<arg>/users/account</arg>
+<arg>data=${object}</arg>
+</arguments>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20180523 16:00:00.405" level="INFO">Post Request using : alias=account, uri=/users/account, data=&lt;empty&gt;, headers=None, files=None, allow_redirects=True </msg>
+<msg timestamp="20180523 16:00:00.405" level="INFO">${result} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20180523 16:00:00.405" starttime="20180523 15:59:59.759"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${result.status_code}</arg>
+<arg>${200}</arg>
+</arguments>
+<status status="PASS" endtime="20180523 16:00:00.407" starttime="20180523 16:00:00.406"></status>
+</kw>
+<tags>
+<tag>users account</tag>
+</tags>
+<status status="PASS" endtime="20180523 16:00:00.408" critical="yes" starttime="20180523 15:59:59.753"></status>
+</test>
+<test id="s1-t3" name="Testing users login">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20180523 16:00:00.411" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20180523 16:00:00.411" starttime="20180523 16:00:00.410"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>login</arg>
+<arg>${url}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:00.412" level="INFO">Creating Session using : alias=login, url=http://54.186.254.137:6060, headers={u'Content-Type': u'application/json'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20180523 16:00:00.412" starttime="20180523 16:00:00.411"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>json.load(open("login.json", "r"))</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${object}</var>
+</assign>
+<msg timestamp="20180523 16:00:00.413" level="INFO">${object} = {u'userName': u'rc@r.com', u'password': u'!@#123QW'}</msg>
+<status status="PASS" endtime="20180523 16:00:00.413" starttime="20180523 16:00:00.413"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>login</arg>
+<arg>/users/login</arg>
+<arg>data=${object}</arg>
+</arguments>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20180523 16:00:00.988" level="INFO">Post Request using : alias=login, uri=/users/login, data=&lt;empty&gt;, headers=None, files=None, allow_redirects=True </msg>
+<msg timestamp="20180523 16:00:00.988" level="INFO">${result} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20180523 16:00:00.988" starttime="20180523 16:00:00.414"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${result.json()}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:00.989" level="INFO">{u'accStatus': u'INACTIVE', u'token': u'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDAsImV4cCI6MTUyNzE1NzgwMH0.JHxAHyyy6gVNAIcjrRs_eQTDYSVctRG8pDhqBV6s0WA', u'userId': 100}</msg>
+<status status="PASS" endtime="20180523 16:00:00.989" starttime="20180523 16:00:00.988"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${result.status_code}</arg>
+<arg>${200}</arg>
+</arguments>
+<status status="PASS" endtime="20180523 16:00:00.990" starttime="20180523 16:00:00.990"></status>
+</kw>
+<tags>
+<tag>users login</tag>
+</tags>
+<status status="PASS" endtime="20180523 16:00:00.991" critical="yes" starttime="20180523 16:00:00.409"></status>
+</test>
+<test id="s1-t4" name="Test for Getting user account">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20180523 16:00:00.993" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20180523 16:00:00.993" starttime="20180523 16:00:00.992"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>user</arg>
+<arg>${url}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:00.995" level="INFO">Creating Session using : alias=user, url=http://54.186.254.137:6060, headers={u'Content-Type': u'application/json'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20180523 16:00:00.996" starttime="20180523 16:00:00.994"></status>
+</kw>
+<kw name="Get token">
+<assign>
+<var>${gettoken}</var>
+</assign>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20180523 16:00:01.002" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20180523 16:00:01.002" starttime="20180523 16:00:00.998"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>login</arg>
+<arg>${url}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:01.003" level="INFO">Creating Session using : alias=login, url=http://54.186.254.137:6060, headers={u'Content-Type': u'application/json'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20180523 16:00:01.003" starttime="20180523 16:00:01.002"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>json.load(open("login.json", "r"))</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${object}</var>
+</assign>
+<msg timestamp="20180523 16:00:01.004" level="INFO">${object} = {u'userName': u'rc@r.com', u'password': u'!@#123QW'}</msg>
+<status status="PASS" endtime="20180523 16:00:01.004" starttime="20180523 16:00:01.003"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>login</arg>
+<arg>/users/login</arg>
+<arg>data=${object}</arg>
+</arguments>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20180523 16:00:01.520" level="INFO">Post Request using : alias=login, uri=/users/login, data=&lt;empty&gt;, headers=None, files=None, allow_redirects=True </msg>
+<msg timestamp="20180523 16:00:01.520" level="INFO">${result} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20180523 16:00:01.521" starttime="20180523 16:00:01.004"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${result.json()['token']}</arg>
+</arguments>
+<assign>
+<var>${token}</var>
+</assign>
+<msg timestamp="20180523 16:00:01.521" level="INFO">${token} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDEsImV4cCI6MTUyNzE1NzgwMX0.-Fw8hpnXSSTwe7ndgo8STz0KmzztOetnt_O7vOR7eSc</msg>
+<status status="PASS" endtime="20180523 16:00:01.521" starttime="20180523 16:00:01.521"></status>
+</kw>
+<msg timestamp="20180523 16:00:01.522" level="INFO">${gettoken} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDEsImV4cCI6MTUyNzE1NzgwMX0.-Fw8hpnXSSTwe7ndgo8STz0KmzztOetnt_O7vOR7eSc</msg>
+<status status="PASS" endtime="20180523 16:00:01.522" starttime="20180523 16:00:00.996"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>token=${gettoken}</arg>
+</arguments>
+<assign>
+<var>&amp;{token}</var>
+</assign>
+<msg timestamp="20180523 16:00:01.523" level="INFO">&amp;{token} = { token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDEsImV4cCI6MTUyNzE1NzgwMX0.-Fw8hpnXSSTwe7ndgo8STz0KmzztOetnt_O7vOR7eSc }</msg>
+<status status="PASS" endtime="20180523 16:00:01.523" starttime="20180523 16:00:01.522"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
+<arguments>
+<arg>user</arg>
+<arg>/users/106</arg>
+<arg>headers=${token}</arg>
+</arguments>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20180523 16:00:02.079" level="INFO">Get Request using : alias=user, uri=/users/106, headers={u'token': u'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDEsImV4cCI6MTUyNzE1NzgwMX0.-Fw8hpnXSSTwe7ndgo8STz0KmzztOetnt_O7vOR7eSc'} json=None</msg>
+<msg timestamp="20180523 16:00:02.080" level="INFO">${result} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20180523 16:00:02.080" starttime="20180523 16:00:01.523"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${result.json()}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:02.084" level="INFO">[{u'emailId': u'rc@r.com', u'businessStartDate': u'1927-01-01T00:00:00.000Z', u'creditCardUsage': True, u'userId': 106, u'altElectronicBusinessPoc': {u'fax': u'5854867103', u'firstName': u'TRACY', u'usPhone': u'5852705590', u'lastName': u'SMITH', u'middleInitial': u'M', u'address': {u'Country': u'USA', u'stateorProvince': u'NY', u'Line1': u'100 METRO PARK', u'Zip': u'14623', u'City': u'ROCHESTER'}, u'email': u'TRACY.SMITH@HONEYWELL.COM'}, u'corporateStructureCode': u'2L', u'disasterRelief': [{u'type': u'ANY'}], u'electronicBusinessPoc': {u'fax': u'5854867103', u'firstName': u'TRACY', u'usPhone': u'4806069863', u'lastName': u'SMITH', u'middleInitial': u'M', u'address': {u'Country': u'USA', u'stateorProvince': u'NY', u'Line1': u'20 Wildbriar Road', u'Zip': u'14623', u'City': u'Rochester'}, u'email': u'TRACY.SMITH@HONEYWELL.COM'}, u'businessTypes': [u'2X', u'MF'], u'expirationDate': u'2019-04-18T09:12:49.000Z', u'duns4': u'0000', u'samsDetails': {u'sam_data': {u'registration': {u'corporateStructureName': u'Corporate Entity (Not Tax Exempt)', u'creditCardUsage': True, u'fiscalYearEndCloseDate': u'12/31', u'disasterRelief': {u'type': u'ANY'}, u'businessStartDate': u'1927-01-01', u'businessTypes': [u'2X', u'MF'], u'expirationDate': u'2019-04-18 09:12:49.0', u'dunsPlus4': u'0000', u'doingBusinessAsName': u'HONEYWELL', u'stateOfIncorporation': u'DE', u'corporateStructureCode': u'2L', u'certificationsURL': {u'pdfUrl': u'https://www.sam.gov/SAMPortal/filedownload?reportType=2&amp;orgId=8qNMugC%2BQeerPsI0%2BSDGIO0Dl2P0Qtb%2B6l3i8PNp8dzmpmKYdg4fGxitkLSQu7qk&amp;pitId=hCPmhCPLFgOtB218z5hSS7n8gxf4YvrKGvFD%2FuC5YCucZcq2PwwVLme7v3FT9DUL&amp;requestId=vsKoysG212te4L5'}, u'altElectronicBusinessPoc': {u'fax': u'5854867103', u'firstName': u'TRACY', u'usPhone': u'5852705590', u'lastName': u'SMITH', u'middleInitial': u'M', u'address': {u'Country': u'USA', u'stateorProvince': u'NY', u'Line1': u'100 METRO PARK', u'Zip': u'14623', u'City': u'ROCHESTER'}, u'email': u'TRACY.SMITH@HONEYWELL.COM'}, u'hasKnownExclusion': False, u'congressionalDistrict': u'FL 25', u'statusMessage': u'Active', u'legalBusinessName': u'HONEYWELL INTERNATIONAL INC.', u'status': u'ACTIVE', u'purposeOfRegistration': u'ALL_AWARDS', u'countryOfIncorporation': u'USA', u'hasDelinquentFederalDebt': False, u'duns': u'063603955', u'cage': u'4P211', u'publicDisplay': True, u'samAddress': {u'City': u'MIAMI', u'Zip': u'33178', u'Country': u'USA', u'Line1': u'9315 NW 112TH AVE', u'stateorProvince': u'FL', u'Zip4': u'2516'}, u'altGovtBusinessPoc': {u'fax': u'5854867103', u'firstName': u'TRACY', u'usPhone': u'4806069863', u'lastName': u'SMITH', u'middleInitial': u'M', u'address': {u'Country': u'USA', u'stateorProvince': u'NY', u'Line1': u'20 Wildbriar Road', u'Zip': u'14623', u'City': u'ROCHESTER'}, u'email': u'TRACY.SMITH@HONEYWELL.COM'}, u'govtBusinessPoc': {u'fax': u'5854867103', u'firstName': u'TRACY', u'usPhone': u'4806069863', u'lastName': u'SMITH', u'middleInitial': u'M', u'address': {u'Country': u'USA', u'stateorProvince': u'NY', u'Line1': u'20 Wildbriar Road', u'Zip': u'14623', u'City': u'Rochester'}, u'email': u'TRACY.SMITH@HONEYWELL.COM'}, u'corporateUrl': u'http://www.honeywell.com', u'naics': [{u'naicsCode': u'811310', u'isPrimary': False, u'naicsName': u'Commercial and Industrial Machinery and Equipment (except Automotive and Electronic) Repair and Maintenance '}, {u'naicsCode': u'221330', u'isPrimary': True, u'naicsName': u'Steam and Air-Conditioning Supply '}, {u'naicsCode': u'541690', u'isPrimary': False, u'naicsName': u'Other Scientific and Technical Consulting Services'}, {u'naicsCode': u'541330', u'isPrimary': False, u'naicsName': u'Engineering Services'}, {u'naicsCode': u'334290', u'isPrimary': False, u'naicsName': u'Other Communications Equipment Manufacturing'}, {u'naicsCode': u'236220', u'isPrimary': False, u'naicsName': u'Commercial and Institutional Building Construction '}, {u'naicsCode': u'561210', u'isPrimary': False, u'naicsName': u'Facilities Support Services'}, {u'naicsCode': u'561621', u'isPrimary': False, u'naicsName': u'Security Systems Services (except Locksmiths) '}, {u'naicsCode': u'238220', u'isPrimary': False, u'naicsName': u'Plumbing, Heating, and Air-Conditioning Contractors '}, {u'naicsCode': u'238290', u'isPrimary': False, u'naicsName': u'Other Building Equipment Contractors '}, {u'naicsCode': u'238210', u'isPrimary': False, u'naicsName': u'Electrical Contractors and Other Wiring Installation Contractors'}], u'mailingAddress': {u'Country': u'USA', u'stateorProvince': u'NY', u'Line1': u'20 Wildbriar Road', u'Zip': u'14623', u'City': u'Rochester'}, u'submissionDate': u'2018-04-18 09:12:49.0', u'lastUpdateDate': u'2018-04-18 09:30:08.0', u'activationDate': u'2018-04-18 09:30:08.0', u'electronicBusinessPoc': {u'fax': u'5854867103', u'firstName': u'TRACY', u'usPhone': u'4806069863', u'lastName': u'SMITH', u'middleInitial': u'M', u'address': {u'Country': u'USA', u'stateorProvince': u'NY', u'Line1': u'20 Wildbriar Road', u'Zip': u'14623', u'City': u'Rochester'}, u'email': u'TRACY.SMITH@HONEYWELL.COM'}, u'companyDivision': u'HONEYWELL GLOBAL ACCOUNTS', u'registrationDate': u'2001-09-05 00:00:00.0'}}}, u'doingBusinessAsName': u'HONEYWELL', u'stateOfIncorporation': u'DE', u'fiscalYearCloseDay': u'12/31', u'state': u'Abilash', u'phoneNumber': u'9879879879', u'legalBusinessName': u'HONEYWELL INTERNATIONAL INC.', u'hasKnownExclusion': False, u'congressionalDistrict': u'FL 25', u'statusMessage': u'Active', u'registrationDate': u'2001-09-05T00:00:00.000Z', u'purposeOfRegistration': u'ALL_AWARDS', u'description': u'Abilash', u'countryOfIncorporation': u'USA', u'hasDelinquentFederalDebt': False, u'zervPlatformAcctNumber': 1000000006, u'zervPlatformAddress': u'0x0jhihu008yr3rh3uh939uhfbu', u'duns': u'063603955', u'cage': u'4P211', u'samAddress': {u'City': u'MIAMI', u'Zip': u'33178', u'Country': u'USA', u'Line1': u'9315 NW 112TH AVE', u'stateorProvince': u'FL', u'Zip4': u'2516'}, u'userName': u'rc@r.com', u'altGovtBusinessPoc': {u'fax': u'5854867103', u'firstName': u'TRACY', u'usPhone': u'4806069863', u'lastName': u'SMITH', u'middleInitial': u'M', u'address': {u'Country': u'USA', u'stateorProvince': u'NY', u'Line1': u'20 Wildbriar Road', u'Zip': u'14623', u'City': u'ROCHESTER'}, u'email': u'TRACY.SMITH@HONEYWELL.COM'}, u'corporateUrl': u'http://www.honeywell.com', u'country': u'Abilash', u'mailingAddress': {u'Country': u'USA', u'stateorProvince': u'NY', u'Line1': u'20 Wildbriar Road', u'Zip': u'14623', u'City': u'Rochester'}, u'etherPlatformAddress': u'0x0ujnjh6565hbjhb', u'activationDate': u'2018-04-18T09:30:08.000Z', u'__v': 0, u'lastUpdatedDate': u'2018-04-18T09:30:08.000Z', u'companyDivision': u'HONEYWELL GLOBAL ACCOUNTS', u'pscCodes': [], u'_id': u'5af67fc0f5bc0e3f5aa23f33'}]</msg>
+<status status="PASS" endtime="20180523 16:00:02.085" starttime="20180523 16:00:02.081"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${result.status_code}</arg>
+<arg>${200}</arg>
+</arguments>
+<status status="PASS" endtime="20180523 16:00:02.088" starttime="20180523 16:00:02.086"></status>
+</kw>
+<tags>
+<tag>get account</tag>
+</tags>
+<status status="PASS" endtime="20180523 16:00:02.089" critical="yes" starttime="20180523 16:00:00.991"></status>
+</test>
+<test id="s1-t5" name="Testing users mfa">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20180523 16:00:02.094" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20180523 16:00:02.094" starttime="20180523 16:00:02.092"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>mfa</arg>
+<arg>${url}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:02.095" level="INFO">Creating Session using : alias=mfa, url=http://54.186.254.137:6060, headers={u'Content-Type': u'application/json'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20180523 16:00:02.096" starttime="20180523 16:00:02.094"></status>
+</kw>
+<kw name="Get token">
+<assign>
+<var>${gettoken}</var>
+</assign>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20180523 16:00:02.098" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20180523 16:00:02.098" starttime="20180523 16:00:02.097"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>login</arg>
+<arg>${url}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:02.098" level="INFO">Creating Session using : alias=login, url=http://54.186.254.137:6060, headers={u'Content-Type': u'application/json'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20180523 16:00:02.099" starttime="20180523 16:00:02.098"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>json.load(open("login.json", "r"))</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${object}</var>
+</assign>
+<msg timestamp="20180523 16:00:02.099" level="INFO">${object} = {u'userName': u'rc@r.com', u'password': u'!@#123QW'}</msg>
+<status status="PASS" endtime="20180523 16:00:02.100" starttime="20180523 16:00:02.099"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>login</arg>
+<arg>/users/login</arg>
+<arg>data=${object}</arg>
+</arguments>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20180523 16:00:02.656" level="INFO">Post Request using : alias=login, uri=/users/login, data=&lt;empty&gt;, headers=None, files=None, allow_redirects=True </msg>
+<msg timestamp="20180523 16:00:02.656" level="INFO">${result} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20180523 16:00:02.656" starttime="20180523 16:00:02.100"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${result.json()['token']}</arg>
+</arguments>
+<assign>
+<var>${token}</var>
+</assign>
+<msg timestamp="20180523 16:00:02.658" level="INFO">${token} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDIsImV4cCI6MTUyNzE1NzgwMn0.DLi3-fO-STJ7ha5C8btUza2OFInyNBa1mPp_eW5b-DY</msg>
+<status status="PASS" endtime="20180523 16:00:02.658" starttime="20180523 16:00:02.657"></status>
+</kw>
+<msg timestamp="20180523 16:00:02.659" level="INFO">${gettoken} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDIsImV4cCI6MTUyNzE1NzgwMn0.DLi3-fO-STJ7ha5C8btUza2OFInyNBa1mPp_eW5b-DY</msg>
+<status status="PASS" endtime="20180523 16:00:02.659" starttime="20180523 16:00:02.097"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>token=${gettoken}</arg>
+</arguments>
+<assign>
+<var>&amp;{token}</var>
+</assign>
+<msg timestamp="20180523 16:00:02.662" level="INFO">&amp;{token} = { token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDIsImV4cCI6MTUyNzE1NzgwMn0.DLi3-fO-STJ7ha5C8btUza2OFInyNBa1mPp_eW5b-DY }</msg>
+<status status="PASS" endtime="20180523 16:00:02.662" starttime="20180523 16:00:02.660"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>json.load(open("mfa.json", "r"))</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${object}</var>
+</assign>
+<msg timestamp="20180523 16:00:02.672" level="INFO">${object} = {u'mfaEmailCode': u'0123', u'password': u'!@#123QW', u'userId': u'106'}</msg>
+<status status="PASS" endtime="20180523 16:00:02.672" starttime="20180523 16:00:02.662"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${object}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:02.674" level="INFO">{u'mfaEmailCode': u'0123', u'password': u'!@#123QW', u'userId': u'106'}</msg>
+<status status="PASS" endtime="20180523 16:00:02.674" starttime="20180523 16:00:02.673"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>mfa</arg>
+<arg>/users/mfa</arg>
+<arg>headers=${token}</arg>
+<arg>data=${object}</arg>
+</arguments>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20180523 16:00:03.230" level="INFO">Post Request using : alias=mfa, uri=/users/mfa, data=&lt;empty&gt;, headers={u'token': u'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDIsImV4cCI6MTUyNzE1NzgwMn0.DLi3-fO-STJ7ha5C8btUza2OFInyNBa1mPp_eW5b-DY'}, files=None, allow_redirects=True </msg>
+<msg timestamp="20180523 16:00:03.230" level="INFO">${result} = &lt;Response [500]&gt;</msg>
+<status status="PASS" endtime="20180523 16:00:03.230" starttime="20180523 16:00:02.675"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${result.json()}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:03.232" level="INFO">False</msg>
+<status status="PASS" endtime="20180523 16:00:03.232" starttime="20180523 16:00:03.231"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${result.status_code}</arg>
+<arg>${200}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:03.234" level="FAIL">500 != 200</msg>
+<status status="FAIL" endtime="20180523 16:00:03.234" starttime="20180523 16:00:03.233"></status>
+</kw>
+<tags>
+<tag>mfa</tag>
+</tags>
+<status status="FAIL" endtime="20180523 16:00:03.235" critical="yes" starttime="20180523 16:00:02.090">500 != 200</status>
+</test>
+<test id="s1-t6" name="Testing users update account">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20180523 16:00:03.238" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20180523 16:00:03.238" starttime="20180523 16:00:03.237"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>update</arg>
+<arg>${url}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:03.239" level="INFO">Creating Session using : alias=update, url=http://54.186.254.137:6060, headers={u'Content-Type': u'application/json'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20180523 16:00:03.240" starttime="20180523 16:00:03.238"></status>
+</kw>
+<kw name="Get token">
+<assign>
+<var>${gettoken}</var>
+</assign>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20180523 16:00:03.242" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20180523 16:00:03.243" starttime="20180523 16:00:03.241"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>login</arg>
+<arg>${url}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:03.244" level="INFO">Creating Session using : alias=login, url=http://54.186.254.137:6060, headers={u'Content-Type': u'application/json'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20180523 16:00:03.245" starttime="20180523 16:00:03.243"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>json.load(open("login.json", "r"))</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${object}</var>
+</assign>
+<msg timestamp="20180523 16:00:03.246" level="INFO">${object} = {u'userName': u'rc@r.com', u'password': u'!@#123QW'}</msg>
+<status status="PASS" endtime="20180523 16:00:03.246" starttime="20180523 16:00:03.245"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>login</arg>
+<arg>/users/login</arg>
+<arg>data=${object}</arg>
+</arguments>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20180523 16:00:03.962" level="INFO">Post Request using : alias=login, uri=/users/login, data=&lt;empty&gt;, headers=None, files=None, allow_redirects=True </msg>
+<msg timestamp="20180523 16:00:03.962" level="INFO">${result} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20180523 16:00:03.962" starttime="20180523 16:00:03.246"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${result.json()['token']}</arg>
+</arguments>
+<assign>
+<var>${token}</var>
+</assign>
+<msg timestamp="20180523 16:00:03.964" level="INFO">${token} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDMsImV4cCI6MTUyNzE1NzgwM30.yHLEnNOxHmW76JS4bpeH9Q7_QJqKhqc13dUnrQs0rMo</msg>
+<status status="PASS" endtime="20180523 16:00:03.964" starttime="20180523 16:00:03.963"></status>
+</kw>
+<msg timestamp="20180523 16:00:03.965" level="INFO">${gettoken} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDMsImV4cCI6MTUyNzE1NzgwM30.yHLEnNOxHmW76JS4bpeH9Q7_QJqKhqc13dUnrQs0rMo</msg>
+<status status="PASS" endtime="20180523 16:00:03.965" starttime="20180523 16:00:03.240"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>token=${gettoken}</arg>
+</arguments>
+<assign>
+<var>&amp;{token}</var>
+</assign>
+<msg timestamp="20180523 16:00:03.968" level="INFO">&amp;{token} = { token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDMsImV4cCI6MTUyNzE1NzgwM30.yHLEnNOxHmW76JS4bpeH9Q7_QJqKhqc13dUnrQs0rMo }</msg>
+<status status="PASS" endtime="20180523 16:00:03.968" starttime="20180523 16:00:03.966"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>json.load(open("updateaccount.json", "r"))</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${object}</var>
+</assign>
+<msg timestamp="20180523 16:00:03.981" level="INFO">${object} = {u'businessStartDate': u'1927-01-01', u'doingBusinessAsName': u'HONEYWELL', u'userId': u'106', u'altElectronicBusinessPoc': {u'fax': u'5854867103', u'firstName': u'TRACY', u'usPhone': u'5852705590', u...</msg>
+<status status="PASS" endtime="20180523 16:00:03.981" starttime="20180523 16:00:03.968"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${object}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:03.982" level="INFO">{u'businessStartDate': u'1927-01-01', u'doingBusinessAsName': u'HONEYWELL', u'userId': u'106', u'altElectronicBusinessPoc': {u'fax': u'5854867103', u'firstName': u'TRACY', u'usPhone': u'5852705590', u'lastName': u'SMITH', u'middleInitial': u'M', u'address': {u'Country': u'USA', u'stateorProvince': u'NY', u'Zip': u'14623', u'Line1': u'100 METRO PARK', u'City': u'ROCHESTER'}, u'email': u'TRACY.SMITH@HONEYWELL.COM'}, u'corporateStructureCode': u'2L', u'disasterRelief': {u'type': u'ANY'}, u'electronicBusinessPoc': {u'fax': u'5854867103', u'firstName': u'TRACY', u'usPhone': u'4806069863', u'lastName': u'SMITH', u'middleInitial': u'M', u'address': {u'Country': u'USA', u'stateorProvince': u'NY', u'Zip': u'14623', u'Line1': u'20 Wildbriar Road', u'City': u'Rochester'}, u'email': u'TRACY.SMITH@HONEYWELL.COM'}, u'businessTypes': [u'2X', u'MF'], u'expirationDate': u'2019-04-18 09:12:49.0', u'samsDetails': {u'sam_data': {u'registration': {u'corporateStructureName': u'Corporate Entity (Not Tax Exempt)', u'doingBusinessAsName': u'HONEYWELL', u'registrationDate': u'2001-09-05 00:00:00.0', u'fiscalYearEndCloseDate': u'12/31', u'disasterRelief': {u'type': u'ANY'}, u'businessStartDate': u'1927-01-01', u'businessTypes': [u'2X', u'MF'], u'expirationDate': u'2019-04-18 09:12:49.0', u'dunsPlus4': u'0000', u'creditCardUsage': True, u'stateOfIncorporation': u'DE', u'corporateStructureCode': u'2L', u'certificationsURL': {u'pdfUrl': u'https://www.sam.gov/SAMPortal/filedownload?reportType=2&amp;orgId=8qNMugC%2BQeerPsI0%2BSDGIO0Dl2P0Qtb%2B6l3i8PNp8dzmpmKYdg4fGxitkLSQu7qk&amp;pitId=hCPmhCPLFgOtB218z5hSS7n8gxf4YvrKGvFD%2FuC5YCucZcq2PwwVLme7v3FT9DUL&amp;requestId=vsKoysG212te4L5'}, u'altElectronicBusinessPoc': {u'fax': u'5854867103', u'firstName': u'TRACY', u'usPhone': u'5852705590', u'lastName': u'SMITH', u'middleInitial': u'M', u'address': {u'Country': u'USA', u'stateorProvince': u'NY', u'Zip': u'14623', u'Line1': u'100 METRO PARK', u'City': u'ROCHESTER'}, u'email': u'TRACY.SMITH@HONEYWELL.COM'}, u'hasKnownExclusion': False, u'congressionalDistrict': u'FL 25', u'statusMessage': u'Active', u'legalBusinessName': u'HONEYWELL INTERNATIONAL INC.', u'status': u'ACTIVE', u'purposeOfRegistration': u'ALL_AWARDS', u'countryOfIncorporation': u'USA', u'hasDelinquentFederalDebt': False, u'duns': u'063603955', u'cage': u'4P211', u'publicDisplay': True, u'samAddress': {u'City': u'MIAMI', u'Zip': u'33178', u'Country': u'USA', u'Line1': u'9315 NW 112TH AVE', u'stateorProvince': u'FL', u'Zip4': u'2516'}, u'altGovtBusinessPoc': {u'fax': u'5854867103', u'firstName': u'TRACY', u'usPhone': u'4806069863', u'lastName': u'SMITH', u'middleInitial': u'M', u'address': {u'Country': u'USA', u'stateorProvince': u'NY', u'Zip': u'14623', u'Line1': u'20 Wildbriar Road', u'City': u'ROCHESTER'}, u'email': u'TRACY.SMITH@HONEYWELL.COM'}, u'corporateUrl': u'http://www.honeywell.com', u'naics': [{u'naicsCode': u'811310', u'isPrimary': False, u'naicsName': u'Commercial and Industrial Machinery and Equipment (except Automotive and Electronic) Repair and Maintenance '}, {u'naicsCode': u'221330', u'isPrimary': True, u'naicsName': u'Steam and Air-Conditioning Supply '}, {u'naicsCode': u'541690', u'isPrimary': False, u'naicsName': u'Other Scientific and Technical Consulting Services'}, {u'naicsCode': u'541330', u'isPrimary': False, u'naicsName': u'Engineering Services'}, {u'naicsCode': u'334290', u'isPrimary': False, u'naicsName': u'Other Communications Equipment Manufacturing'}, {u'naicsCode': u'236220', u'isPrimary': False, u'naicsName': u'Commercial and Institutional Building Construction '}, {u'naicsCode': u'561210', u'isPrimary': False, u'naicsName': u'Facilities Support Services'}, {u'naicsCode': u'561621', u'isPrimary': False, u'naicsName': u'Security Systems Services (except Locksmiths) '}, {u'naicsCode': u'238220', u'isPrimary': False, u'naicsName': u'Plumbing, Heating, and Air-Conditioning Contractors '}, {u'naicsCode': u'238290', u'isPrimary': False, u'naicsName': u'Other Building Equipment Contractors '}, {u'naicsCode': u'238210', u'isPrimary': False, u'naicsName': u'Electrical Contractors and Other Wiring Installation Contractors'}], u'mailingAddress': {u'Country': u'USA', u'stateorProvince': u'NY', u'Zip': u'14623', u'Line1': u'20 Wildbriar Road', u'City': u'Rochester'}, u'submissionDate': u'2018-04-18 09:12:49.0', u'lastUpdateDate': u'2018-04-18 09:30:08.0', u'activationDate': u'2018-04-18 09:30:08.0', u'electronicBusinessPoc': {u'fax': u'5854867103', u'firstName': u'TRACY', u'usPhone': u'4806069863', u'lastName': u'SMITH', u'middleInitial': u'M', u'address': {u'Country': u'USA', u'stateorProvince': u'NY', u'Zip': u'14623', u'Line1': u'20 Wildbriar Road', u'City': u'Rochester'}, u'email': u'TRACY.SMITH@HONEYWELL.COM'}, u'companyDivision': u'HONEYWELL GLOBAL ACCOUNTS', u'govtBusinessPoc': {u'fax': u'5854867103', u'firstName': u'TRACY', u'usPhone': u'4806069863', u'lastName': u'SMITH', u'middleInitial': u'M', u'address': {u'Country': u'USA', u'stateorProvince': u'NY', u'Zip': u'14623', u'Line1': u'20 Wildbriar Road', u'City': u'Rochester'}, u'email': u'TRACY.SMITH@HONEYWELL.COM'}}}}, u'creditCardUsage': True, u'duns4': u'0000', u'fiscalYearCloseDay': u'12/31', u'legalBusinessName': u'HONEYWELL INTERNATIONAL INC.', u'hasKnownExclusion': False, u'congressionalDistrict': u'FL 25', u'statusMessage': u'Active', u'registrationDate': u'2001-09-05 00:00:00.0', u'purposeOfRegistration': u'ALL_AWARDS', u'countryOfIncorporation': u'USA', u'hasDelinquentFederalDebt': False, u'duns': u'063603955', u'cage': u'4P211', u'stateOfIncorporation': u'DE', u'altGovtBusinessPoc': {u'fax': u'5854867103', u'firstName': u'TRACY', u'usPhone': u'4806069863', u'lastName': u'SMITH', u'middleInitial': u'M', u'address': {u'Country': u'USA', u'stateorProvince': u'NY', u'Zip': u'14623', u'Line1': u'20 Wildbriar Road', u'City': u'ROCHESTER'}, u'email': u'TRACY.SMITH@HONEYWELL.COM'}, u'corporateUrl': u'http://www.honeywell.com', u'mailingAddress': {u'Country': u'USA', u'stateorProvince': u'NY', u'Zip': u'14623', u'Line1': u'20 Wildbriar Road', u'City': u'Rochester'}, u'activationDate': u'2018-04-18 09:30:08.0', u'samAddress': {u'City': u'MIAMI', u'Zip': u'33178', u'Country': u'USA', u'Line1': u'9315 NW 112TH AVE', u'stateorProvince': u'FL', u'Zip4': u'2516'}, u'lastUpdatedDate': u'2018-04-18 09:30:08.0', u'companyDivision': u'HONEYWELL GLOBAL ACCOUNTS'}</msg>
+<status status="PASS" endtime="20180523 16:00:03.988" starttime="20180523 16:00:03.981"></status>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<doc>Send a PUT request on the session object found using the</doc>
+<arguments>
+<arg>update</arg>
+<arg>/users/account</arg>
+<arg>headers=${token}</arg>
+<arg>data=${object}</arg>
+</arguments>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20180523 16:00:04.676" level="INFO">Put Request using : alias=update, uri=/users/account, data={"businessStartDate": "1927-01-01", "doingBusinessAsName": "HONEYWELL", "userId": "106", "altElectronicBusinessPoc": {"fax": "5854867103", "firstName": "TRACY", "usPhone": "5852705590", "lastName": "SMITH", "middleInitial": "M", "address": {"Country": "USA", "stateorProvince": "NY", "Zip": "14623", "Line1": "100 METRO PARK", "City": "ROCHESTER"}, "email": "TRACY.SMITH@HONEYWELL.COM"}, "corporateStructureCode": "2L", "disasterRelief": {"type": "ANY"}, "electronicBusinessPoc": {"fax": "5854867103", "firstName": "TRACY", "usPhone": "4806069863", "lastName": "SMITH", "middleInitial": "M", "address": {"Country": "USA", "stateorProvince": "NY", "Zip": "14623", "Line1": "20 Wildbriar Road", "City": "Rochester"}, "email": "TRACY.SMITH@HONEYWELL.COM"}, "businessTypes": ["2X", "MF"], "expirationDate": "2019-04-18 09:12:49.0", "samsDetails": {"sam_data": {"registration": {"corporateStructureName": "Corporate Entity (Not Tax Exempt)", "doingBusinessAsName": "HONEYWELL", "registrationDate": "2001-09-05 00:00:00.0", "fiscalYearEndCloseDate": "12/31", "disasterRelief": {"type": "ANY"}, "businessStartDate": "1927-01-01", "businessTypes": ["2X", "MF"], "expirationDate": "2019-04-18 09:12:49.0", "dunsPlus4": "0000", "creditCardUsage": true, "stateOfIncorporation": "DE", "corporateStructureCode": "2L", "certificationsURL": {"pdfUrl": "https://www.sam.gov/SAMPortal/filedownload?reportType=2&amp;orgId=8qNMugC%2BQeerPsI0%2BSDGIO0Dl2P0Qtb%2B6l3i8PNp8dzmpmKYdg4fGxitkLSQu7qk&amp;pitId=hCPmhCPLFgOtB218z5hSS7n8gxf4YvrKGvFD%2FuC5YCucZcq2PwwVLme7v3FT9DUL&amp;requestId=vsKoysG212te4L5"}, "altElectronicBusinessPoc": {"fax": "5854867103", "firstName": "TRACY", "usPhone": "5852705590", "lastName": "SMITH", "middleInitial": "M", "address": {"Country": "USA", "stateorProvince": "NY", "Zip": "14623", "Line1": "100 METRO PARK", "City": "ROCHESTER"}, "email": "TRACY.SMITH@HONEYWELL.COM"}, "hasKnownExclusion": false, "congressionalDistrict": "FL 25", "statusMessage": "Active", "legalBusinessName": "HONEYWELL INTERNATIONAL INC.", "status": "ACTIVE", "purposeOfRegistration": "ALL_AWARDS", "countryOfIncorporation": "USA", "hasDelinquentFederalDebt": false, "duns": "063603955", "cage": "4P211", "publicDisplay": true, "samAddress": {"City": "MIAMI", "Zip": "33178", "Country": "USA", "Line1": "9315 NW 112TH AVE", "stateorProvince": "FL", "Zip4": "2516"}, "altGovtBusinessPoc": {"fax": "5854867103", "firstName": "TRACY", "usPhone": "4806069863", "lastName": "SMITH", "middleInitial": "M", "address": {"Country": "USA", "stateorProvince": "NY", "Zip": "14623", "Line1": "20 Wildbriar Road", "City": "ROCHESTER"}, "email": "TRACY.SMITH@HONEYWELL.COM"}, "corporateUrl": "http://www.honeywell.com", "naics": [{"naicsCode": "811310", "isPrimary": false, "naicsName": "Commercial and Industrial Machinery and Equipment (except Automotive and Electronic) Repair and Maintenance "}, {"naicsCode": "221330", "isPrimary": true, "naicsName": "Steam and Air-Conditioning Supply "}, {"naicsCode": "541690", "isPrimary": false, "naicsName": "Other Scientific and Technical Consulting Services"}, {"naicsCode": "541330", "isPrimary": false, "naicsName": "Engineering Services"}, {"naicsCode": "334290", "isPrimary": false, "naicsName": "Other Communications Equipment Manufacturing"}, {"naicsCode": "236220", "isPrimary": false, "naicsName": "Commercial and Institutional Building Construction "}, {"naicsCode": "561210", "isPrimary": false, "naicsName": "Facilities Support Services"}, {"naicsCode": "561621", "isPrimary": false, "naicsName": "Security Systems Services (except Locksmiths) "}, {"naicsCode": "238220", "isPrimary": false, "naicsName": "Plumbing, Heating, and Air-Conditioning Contractors "}, {"naicsCode": "238290", "isPrimary": false, "naicsName": "Other Building Equipment Contractors "}, {"naicsCode": "238210", "isPrimary": false, "naicsName": "Electrical Contractors and Other Wiring Installation Contractors"}], "mailingAddress": {"Country": "USA", "stateorProvince": "NY", "Zip": "14623", "Line1": "20 Wildbriar Road", "City": "Rochester"}, "submissionDate": "2018-04-18 09:12:49.0", "lastUpdateDate": "2018-04-18 09:30:08.0", "activationDate": "2018-04-18 09:30:08.0", "electronicBusinessPoc": {"fax": "5854867103", "firstName": "TRACY", "usPhone": "4806069863", "lastName": "SMITH", "middleInitial": "M", "address": {"Country": "USA", "stateorProvince": "NY", "Zip": "14623", "Line1": "20 Wildbriar Road", "City": "Rochester"}, "email": "TRACY.SMITH@HONEYWELL.COM"}, "companyDivision": "HONEYWELL GLOBAL ACCOUNTS", "govtBusinessPoc": {"fax": "5854867103", "firstName": "TRACY", "usPhone": "4806069863", "lastName": "SMITH", "middleInitial": "M", "address": {"Country": "USA", "stateorProvince": "NY", "Zip": "14623", "Line1": "20 Wildbriar Road", "City": "Rochester"}, "email": "TRACY.SMITH@HONEYWELL.COM"}}}}, "creditCardUsage": true, "duns4": "0000", "fiscalYearCloseDay": "12/31", "legalBusinessName": "HONEYWELL INTERNATIONAL INC.", "hasKnownExclusion": false, "congressionalDistrict": "FL 25", "statusMessage": "Active", "registrationDate": "2001-09-05 00:00:00.0", "purposeOfRegistration": "ALL_AWARDS", "countryOfIncorporation": "USA", "hasDelinquentFederalDebt": false, "duns": "063603955", "cage": "4P211", "stateOfIncorporation": "DE", "altGovtBusinessPoc": {"fax": "5854867103", "firstName": "TRACY", "usPhone": "4806069863", "lastName": "SMITH", "middleInitial": "M", "address": {"Country": "USA", "stateorProvince": "NY", "Zip": "14623", "Line1": "20 Wildbriar Road", "City": "ROCHESTER"}, "email": "TRACY.SMITH@HONEYWELL.COM"}, "corporateUrl": "http://www.honeywell.com", "mailingAddress": {"Country": "USA", "stateorProvince": "NY", "Zip": "14623", "Line1": "20 Wildbriar Road", "City": "Rochester"}, "activationDate": "2018-04-18 09:30:08.0", "samAddress": {"City": "MIAMI", "Zip": "33178", "Country": "USA", "Line1": "9315 NW 112TH AVE", "stateorProvince": "FL", "Zip4": "2516"}, "lastUpdatedDate": "2018-04-18 09:30:08.0", "companyDivision": "HONEYWELL GLOBAL ACCOUNTS"},                     headers={u'token': u'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDMsImV4cCI6MTUyNzE1NzgwM30.yHLEnNOxHmW76JS4bpeH9Q7_QJqKhqc13dUnrQs0rMo'}, allow_redirects=True </msg>
+<msg timestamp="20180523 16:00:04.677" level="INFO">${result} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20180523 16:00:04.677" starttime="20180523 16:00:03.989"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${result.status_code}</arg>
+<arg>${200}</arg>
+</arguments>
+<status status="PASS" endtime="20180523 16:00:04.679" starttime="20180523 16:00:04.678"></status>
+</kw>
+<tags>
+<tag>update account</tag>
+</tags>
+<status status="PASS" endtime="20180523 16:00:04.680" critical="yes" starttime="20180523 16:00:03.236"></status>
+</test>
+<test id="s1-t7" name="Testing users profile details">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20180523 16:00:04.685" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20180523 16:00:04.685" starttime="20180523 16:00:04.682"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>Profiledetail</arg>
+<arg>${url}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:04.686" level="INFO">Creating Session using : alias=Profiledetail, url=http://54.186.254.137:6060, headers={u'Content-Type': u'application/json'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20180523 16:00:04.688" starttime="20180523 16:00:04.685"></status>
+</kw>
+<kw name="Get token">
+<assign>
+<var>${gettoken}</var>
+</assign>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20180523 16:00:04.690" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20180523 16:00:04.690" starttime="20180523 16:00:04.689"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>login</arg>
+<arg>${url}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:04.691" level="INFO">Creating Session using : alias=login, url=http://54.186.254.137:6060, headers={u'Content-Type': u'application/json'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20180523 16:00:04.692" starttime="20180523 16:00:04.690"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>json.load(open("login.json", "r"))</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${object}</var>
+</assign>
+<msg timestamp="20180523 16:00:04.693" level="INFO">${object} = {u'userName': u'rc@r.com', u'password': u'!@#123QW'}</msg>
+<status status="PASS" endtime="20180523 16:00:04.693" starttime="20180523 16:00:04.692"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>login</arg>
+<arg>/users/login</arg>
+<arg>data=${object}</arg>
+</arguments>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20180523 16:00:05.253" level="INFO">Post Request using : alias=login, uri=/users/login, data=&lt;empty&gt;, headers=None, files=None, allow_redirects=True </msg>
+<msg timestamp="20180523 16:00:05.254" level="INFO">${result} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20180523 16:00:05.254" starttime="20180523 16:00:04.693"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${result.json()['token']}</arg>
+</arguments>
+<assign>
+<var>${token}</var>
+</assign>
+<msg timestamp="20180523 16:00:05.256" level="INFO">${token} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDQsImV4cCI6MTUyNzE1NzgwNH0.3WGAXbutBqxFBNUn1RypWbVdlrk7JvOYQkWlCalySn8</msg>
+<status status="PASS" endtime="20180523 16:00:05.256" starttime="20180523 16:00:05.255"></status>
+</kw>
+<msg timestamp="20180523 16:00:05.257" level="INFO">${gettoken} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDQsImV4cCI6MTUyNzE1NzgwNH0.3WGAXbutBqxFBNUn1RypWbVdlrk7JvOYQkWlCalySn8</msg>
+<status status="PASS" endtime="20180523 16:00:05.257" starttime="20180523 16:00:04.688"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>json.load(open("profiledetail.json", "r"))</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${object}</var>
+</assign>
+<msg timestamp="20180523 16:00:05.259" level="INFO">${object} = {u'userid': u'106'}</msg>
+<status status="PASS" endtime="20180523 16:00:05.259" starttime="20180523 16:00:05.258"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>token=${gettoken}</arg>
+<arg>userid=${object['userid']}</arg>
+</arguments>
+<assign>
+<var>&amp;{token}</var>
+</assign>
+<msg timestamp="20180523 16:00:05.262" level="INFO">&amp;{token} = { token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDQsImV4cCI6MTUyNzE1NzgwNH0.3WGAXbutBqxFBNUn1RypWbVdlrk7JvOYQkWlCalySn8 | userid=106 }</msg>
+<status status="PASS" endtime="20180523 16:00:05.262" starttime="20180523 16:00:05.260"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
+<arguments>
+<arg>Profiledetail</arg>
+<arg>/users/profile/details</arg>
+<arg>headers=${token}</arg>
+</arguments>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20180523 16:00:05.791" level="INFO">Get Request using : alias=Profiledetail, uri=/users/profile/details, headers={u'token': u'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDQsImV4cCI6MTUyNzE1NzgwNH0.3WGAXbutBqxFBNUn1RypWbVdlrk7JvOYQkWlCalySn8', u'userid': u'106'} json=None</msg>
+<msg timestamp="20180523 16:00:05.792" level="INFO">${result} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20180523 16:00:05.792" starttime="20180523 16:00:05.263"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${result.json()}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:05.795" level="INFO">{u'status': True, u'data': {u'emailId': u'rc@r.com', u'businessStartDate': u'1927-01-01T00:00:00.000Z', u'creditCardUsage': True, u'userId': 106, u'altElectronicBusinessPoc': {u'fax': u'5854867103', u'firstName': u'TRACY', u'usPhone': u'5852705590', u'lastName': u'SMITH', u'middleInitial': u'M', u'address': {u'Country': u'USA', u'stateorProvince': u'NY', u'Line1': u'100 METRO PARK', u'Zip': u'14623', u'City': u'ROCHESTER'}, u'email': u'TRACY.SMITH@HONEYWELL.COM'}, u'corporateStructureCode': u'2L', u'disasterRelief': [{u'type': u'ANY'}], u'electronicBusinessPoc': {u'fax': u'5854867103', u'firstName': u'TRACY', u'usPhone': u'4806069863', u'lastName': u'SMITH', u'middleInitial': u'M', u'address': {u'Country': u'USA', u'stateorProvince': u'NY', u'Line1': u'20 Wildbriar Road', u'Zip': u'14623', u'City': u'Rochester'}, u'email': u'TRACY.SMITH@HONEYWELL.COM'}, u'businessTypes': [u'2X', u'MF'], u'expirationDate': u'2019-04-18T09:12:49.000Z', u'duns4': u'0000', u'samsDetails': {u'sam_data': {u'registration': {u'corporateStructureName': u'Corporate Entity (Not Tax Exempt)', u'creditCardUsage': True, u'fiscalYearEndCloseDate': u'12/31', u'disasterRelief': {u'type': u'ANY'}, u'businessStartDate': u'1927-01-01', u'businessTypes': [u'2X', u'MF'], u'expirationDate': u'2019-04-18 09:12:49.0', u'dunsPlus4': u'0000', u'doingBusinessAsName': u'HONEYWELL', u'stateOfIncorporation': u'DE', u'corporateStructureCode': u'2L', u'certificationsURL': {u'pdfUrl': u'https://www.sam.gov/SAMPortal/filedownload?reportType=2&amp;orgId=8qNMugC%2BQeerPsI0%2BSDGIO0Dl2P0Qtb%2B6l3i8PNp8dzmpmKYdg4fGxitkLSQu7qk&amp;pitId=hCPmhCPLFgOtB218z5hSS7n8gxf4YvrKGvFD%2FuC5YCucZcq2PwwVLme7v3FT9DUL&amp;requestId=vsKoysG212te4L5'}, u'altElectronicBusinessPoc': {u'fax': u'5854867103', u'firstName': u'TRACY', u'usPhone': u'5852705590', u'lastName': u'SMITH', u'middleInitial': u'M', u'address': {u'Country': u'USA', u'stateorProvince': u'NY', u'Line1': u'100 METRO PARK', u'Zip': u'14623', u'City': u'ROCHESTER'}, u'email': u'TRACY.SMITH@HONEYWELL.COM'}, u'hasKnownExclusion': False, u'congressionalDistrict': u'FL 25', u'statusMessage': u'Active', u'legalBusinessName': u'HONEYWELL INTERNATIONAL INC.', u'status': u'ACTIVE', u'purposeOfRegistration': u'ALL_AWARDS', u'countryOfIncorporation': u'USA', u'hasDelinquentFederalDebt': False, u'duns': u'063603955', u'cage': u'4P211', u'publicDisplay': True, u'samAddress': {u'City': u'MIAMI', u'Zip': u'33178', u'Country': u'USA', u'Line1': u'9315 NW 112TH AVE', u'stateorProvince': u'FL', u'Zip4': u'2516'}, u'altGovtBusinessPoc': {u'fax': u'5854867103', u'firstName': u'TRACY', u'usPhone': u'4806069863', u'lastName': u'SMITH', u'middleInitial': u'M', u'address': {u'Country': u'USA', u'stateorProvince': u'NY', u'Line1': u'20 Wildbriar Road', u'Zip': u'14623', u'City': u'ROCHESTER'}, u'email': u'TRACY.SMITH@HONEYWELL.COM'}, u'govtBusinessPoc': {u'fax': u'5854867103', u'firstName': u'TRACY', u'usPhone': u'4806069863', u'lastName': u'SMITH', u'middleInitial': u'M', u'address': {u'Country': u'USA', u'stateorProvince': u'NY', u'Line1': u'20 Wildbriar Road', u'Zip': u'14623', u'City': u'Rochester'}, u'email': u'TRACY.SMITH@HONEYWELL.COM'}, u'corporateUrl': u'http://www.honeywell.com', u'naics': [{u'naicsCode': u'811310', u'isPrimary': False, u'naicsName': u'Commercial and Industrial Machinery and Equipment (except Automotive and Electronic) Repair and Maintenance '}, {u'naicsCode': u'221330', u'isPrimary': True, u'naicsName': u'Steam and Air-Conditioning Supply '}, {u'naicsCode': u'541690', u'isPrimary': False, u'naicsName': u'Other Scientific and Technical Consulting Services'}, {u'naicsCode': u'541330', u'isPrimary': False, u'naicsName': u'Engineering Services'}, {u'naicsCode': u'334290', u'isPrimary': False, u'naicsName': u'Other Communications Equipment Manufacturing'}, {u'naicsCode': u'236220', u'isPrimary': False, u'naicsName': u'Commercial and Institutional Building Construction '}, {u'naicsCode': u'561210', u'isPrimary': False, u'naicsName': u'Facilities Support Services'}, {u'naicsCode': u'561621', u'isPrimary': False, u'naicsName': u'Security Systems Services (except Locksmiths) '}, {u'naicsCode': u'238220', u'isPrimary': False, u'naicsName': u'Plumbing, Heating, and Air-Conditioning Contractors '}, {u'naicsCode': u'238290', u'isPrimary': False, u'naicsName': u'Other Building Equipment Contractors '}, {u'naicsCode': u'238210', u'isPrimary': False, u'naicsName': u'Electrical Contractors and Other Wiring Installation Contractors'}], u'mailingAddress': {u'Country': u'USA', u'stateorProvince': u'NY', u'Line1': u'20 Wildbriar Road', u'Zip': u'14623', u'City': u'Rochester'}, u'submissionDate': u'2018-04-18 09:12:49.0', u'lastUpdateDate': u'2018-04-18 09:30:08.0', u'activationDate': u'2018-04-18 09:30:08.0', u'electronicBusinessPoc': {u'fax': u'5854867103', u'firstName': u'TRACY', u'usPhone': u'4806069863', u'lastName': u'SMITH', u'middleInitial': u'M', u'address': {u'Country': u'USA', u'stateorProvince': u'NY', u'Line1': u'20 Wildbriar Road', u'Zip': u'14623', u'City': u'Rochester'}, u'email': u'TRACY.SMITH@HONEYWELL.COM'}, u'companyDivision': u'HONEYWELL GLOBAL ACCOUNTS', u'registrationDate': u'2001-09-05 00:00:00.0'}}}, u'doingBusinessAsName': u'HONEYWELL', u'stateOfIncorporation': u'DE', u'fiscalYearCloseDay': u'12/31', u'state': u'Abilash', u'phoneNumber': u'9879879879', u'legalBusinessName': u'HONEYWELL INTERNATIONAL INC.', u'hasKnownExclusion': False, u'congressionalDistrict': u'FL 25', u'statusMessage': u'Active', u'registrationDate': u'2001-09-05T00:00:00.000Z', u'purposeOfRegistration': u'ALL_AWARDS', u'description': u'Abilash', u'countryOfIncorporation': u'USA', u'hasDelinquentFederalDebt': False, u'zervPlatformAcctNumber': 1000000006, u'zervPlatformAddress': u'0x0jhihu008yr3rh3uh939uhfbu', u'duns': u'063603955', u'cage': u'4P211', u'samAddress': {u'City': u'MIAMI', u'Zip': u'33178', u'Country': u'USA', u'Line1': u'9315 NW 112TH AVE', u'stateorProvince': u'FL', u'Zip4': u'2516'}, u'userName': u'rc@r.com', u'altGovtBusinessPoc': {u'fax': u'5854867103', u'firstName': u'TRACY', u'usPhone': u'4806069863', u'lastName': u'SMITH', u'middleInitial': u'M', u'address': {u'Country': u'USA', u'stateorProvince': u'NY', u'Line1': u'20 Wildbriar Road', u'Zip': u'14623', u'City': u'ROCHESTER'}, u'email': u'TRACY.SMITH@HONEYWELL.COM'}, u'corporateUrl': u'http://www.honeywell.com', u'country': u'Abilash', u'mailingAddress': {u'Country': u'USA', u'stateorProvince': u'NY', u'Line1': u'20 Wildbriar Road', u'Zip': u'14623', u'City': u'Rochester'}, u'etherPlatformAddress': u'0x0ujnjh6565hbjhb', u'activationDate': u'2018-04-18T09:30:08.000Z', u'__v': 0, u'lastUpdatedDate': u'2018-04-18T09:30:08.000Z', u'companyDivision': u'HONEYWELL GLOBAL ACCOUNTS', u'pscCodes': [], u'_id': u'5af67fc0f5bc0e3f5aa23f33'}, u'userId': u'106'}</msg>
+<status status="PASS" endtime="20180523 16:00:05.796" starttime="20180523 16:00:05.793"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${result.status_code}</arg>
+<arg>${200}</arg>
+</arguments>
+<status status="PASS" endtime="20180523 16:00:05.797" starttime="20180523 16:00:05.797"></status>
+</kw>
+<tags>
+<tag>profile details</tag>
+</tags>
+<status status="PASS" endtime="20180523 16:00:05.798" critical="yes" starttime="20180523 16:00:04.681"></status>
+</test>
+<test id="s1-t8" name="Testing users profile intrest">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20180523 16:00:05.800" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20180523 16:00:05.800" starttime="20180523 16:00:05.799"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>intrest</arg>
+<arg>${url}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:05.801" level="INFO">Creating Session using : alias=intrest, url=http://54.186.254.137:6060, headers={u'Content-Type': u'application/json'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20180523 16:00:05.802" starttime="20180523 16:00:05.800"></status>
+</kw>
+<kw name="Get token">
+<assign>
+<var>${gettoken}</var>
+</assign>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20180523 16:00:05.803" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20180523 16:00:05.803" starttime="20180523 16:00:05.802"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>login</arg>
+<arg>${url}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:05.804" level="INFO">Creating Session using : alias=login, url=http://54.186.254.137:6060, headers={u'Content-Type': u'application/json'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20180523 16:00:05.805" starttime="20180523 16:00:05.804"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>json.load(open("login.json", "r"))</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${object}</var>
+</assign>
+<msg timestamp="20180523 16:00:05.806" level="INFO">${object} = {u'userName': u'rc@r.com', u'password': u'!@#123QW'}</msg>
+<status status="PASS" endtime="20180523 16:00:05.806" starttime="20180523 16:00:05.805"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>login</arg>
+<arg>/users/login</arg>
+<arg>data=${object}</arg>
+</arguments>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20180523 16:00:06.360" level="INFO">Post Request using : alias=login, uri=/users/login, data=&lt;empty&gt;, headers=None, files=None, allow_redirects=True </msg>
+<msg timestamp="20180523 16:00:06.361" level="INFO">${result} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20180523 16:00:06.361" starttime="20180523 16:00:05.806"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${result.json()['token']}</arg>
+</arguments>
+<assign>
+<var>${token}</var>
+</assign>
+<msg timestamp="20180523 16:00:06.363" level="INFO">${token} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDYsImV4cCI6MTUyNzE1NzgwNn0.muhP0quLMHEoz7_fQRSRfntoRK0WVKXItY3hK9Ehv-Y</msg>
+<status status="PASS" endtime="20180523 16:00:06.363" starttime="20180523 16:00:06.361"></status>
+</kw>
+<msg timestamp="20180523 16:00:06.363" level="INFO">${gettoken} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDYsImV4cCI6MTUyNzE1NzgwNn0.muhP0quLMHEoz7_fQRSRfntoRK0WVKXItY3hK9Ehv-Y</msg>
+<status status="PASS" endtime="20180523 16:00:06.364" starttime="20180523 16:00:05.802"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>token=${gettoken}</arg>
+</arguments>
+<assign>
+<var>&amp;{token}</var>
+</assign>
+<msg timestamp="20180523 16:00:06.366" level="INFO">&amp;{token} = { token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDYsImV4cCI6MTUyNzE1NzgwNn0.muhP0quLMHEoz7_fQRSRfntoRK0WVKXItY3hK9Ehv-Y }</msg>
+<status status="PASS" endtime="20180523 16:00:06.366" starttime="20180523 16:00:06.364"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>json.load(open("profileintrest.json", "r"))</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${object}</var>
+</assign>
+<msg timestamp="20180523 16:00:06.368" level="INFO">${object} = {u'compPrimer': True, u'ammoRifle': True, u'compProjectile': True, u'userId': u'100', u'ammoRimfire': True, u'ammoHandgun': True, u'compCase': True, u'compGunpowder': True, u'alertName': u'alert2', u'...</msg>
+<status status="PASS" endtime="20180523 16:00:06.368" starttime="20180523 16:00:06.367"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>intrest</arg>
+<arg>/users/profile/intrests</arg>
+<arg>headers=${token}</arg>
+<arg>data=${object}</arg>
+</arguments>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20180523 16:00:06.905" level="INFO">Post Request using : alias=intrest, uri=/users/profile/intrests, data=&lt;empty&gt;, headers={u'token': u'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDYsImV4cCI6MTUyNzE1NzgwNn0.muhP0quLMHEoz7_fQRSRfntoRK0WVKXItY3hK9Ehv-Y'}, files=None, allow_redirects=True </msg>
+<msg timestamp="20180523 16:00:06.906" level="INFO">${result} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20180523 16:00:06.906" starttime="20180523 16:00:06.369"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${result.json()}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:06.907" level="INFO">{u'compPrimer': True, u'compGunpowder': True, u'ammoRifle': True, u'ammoShortgun': True, u'userId': u'100', u'ammoRimfire': True, u'ammoHandgun': True, u'compCase': True, u'__v': 0, u'alertName': u'alert2', u'_id': u'5af970b04245086ad2887873', u'compProjectile': True, u'transactionType': u'buy'}</msg>
+<status status="PASS" endtime="20180523 16:00:06.907" starttime="20180523 16:00:06.906"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${result.status_code}</arg>
+<arg>${200}</arg>
+</arguments>
+<status status="PASS" endtime="20180523 16:00:06.908" starttime="20180523 16:00:06.907"></status>
+</kw>
+<tags>
+<tag>profile intrest</tag>
+</tags>
+<status status="PASS" endtime="20180523 16:00:06.908" critical="yes" starttime="20180523 16:00:05.798"></status>
+</test>
+<test id="s1-t9" name="Testing profile document upload">
+<kw name="Get Binary File" library="OperatingSystem">
+<doc>Returns the contents of a specified file.</doc>
+<arguments>
+<arg>profile.json</arg>
+</arguments>
+<assign>
+<var>${file_data}</var>
+</assign>
+<msg timestamp="20180523 16:00:06.910" html="yes" level="INFO">Getting file '&lt;a href="file:///home/dhanu/CR-Onboarding/testing/profile.json"&gt;/home/dhanu/CR-Onboarding/testing/profile.json&lt;/a&gt;'.</msg>
+<msg timestamp="20180523 16:00:06.911" level="INFO">${file_data} = {"info":{"companyDescridescription":"somthin","businessClassification":"somename","logo":"profile_documents/1526290445140.jpg","fbAccount":"fb.com","instagramAccount":"insta.com","twitterAccount":"te....</msg>
+<status status="PASS" endtime="20180523 16:00:06.911" starttime="20180523 16:00:06.910"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>file</arg>
+<arg>${file_data}</arg>
+</arguments>
+<assign>
+<var>${files}</var>
+</assign>
+<msg timestamp="20180523 16:00:06.912" level="INFO">${files} = {u'file': '{"info":{"companyDescridescription":"somthin","businessClassification":"somename","logo":"profile_documents/1526290445140.jpg","fbAccount":"fb.com","instagramAccount":"insta.com","twitterAc...</msg>
+<status status="PASS" endtime="20180523 16:00:06.912" starttime="20180523 16:00:06.911"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>docupload</arg>
+<arg>${url}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:06.913" level="INFO">Creating Session using : alias=docupload, url=http://54.186.254.137:6060, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20180523 16:00:06.913" starttime="20180523 16:00:06.912"></status>
+</kw>
+<kw name="Get token">
+<assign>
+<var>${gettoken}</var>
+</assign>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20180523 16:00:06.915" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20180523 16:00:06.915" starttime="20180523 16:00:06.914"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>login</arg>
+<arg>${url}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:06.916" level="INFO">Creating Session using : alias=login, url=http://54.186.254.137:6060, headers={u'Content-Type': u'application/json'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20180523 16:00:06.916" starttime="20180523 16:00:06.915"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>json.load(open("login.json", "r"))</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${object}</var>
+</assign>
+<msg timestamp="20180523 16:00:06.917" level="INFO">${object} = {u'userName': u'rc@r.com', u'password': u'!@#123QW'}</msg>
+<status status="PASS" endtime="20180523 16:00:06.917" starttime="20180523 16:00:06.917"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>login</arg>
+<arg>/users/login</arg>
+<arg>data=${object}</arg>
+</arguments>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20180523 16:00:07.453" level="INFO">Post Request using : alias=login, uri=/users/login, data=&lt;empty&gt;, headers=None, files=None, allow_redirects=True </msg>
+<msg timestamp="20180523 16:00:07.454" level="INFO">${result} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20180523 16:00:07.454" starttime="20180523 16:00:06.918"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${result.json()['token']}</arg>
+</arguments>
+<assign>
+<var>${token}</var>
+</assign>
+<msg timestamp="20180523 16:00:07.456" level="INFO">${token} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDcsImV4cCI6MTUyNzE1NzgwN30.kBUSeS9DhAmXVUgagNpp_zbP1yE6BailqDPwnqDQyec</msg>
+<status status="PASS" endtime="20180523 16:00:07.456" starttime="20180523 16:00:07.454"></status>
+</kw>
+<msg timestamp="20180523 16:00:07.457" level="INFO">${gettoken} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDcsImV4cCI6MTUyNzE1NzgwN30.kBUSeS9DhAmXVUgagNpp_zbP1yE6BailqDPwnqDQyec</msg>
+<status status="PASS" endtime="20180523 16:00:07.457" starttime="20180523 16:00:06.914"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>token=${gettoken}</arg>
+</arguments>
+<assign>
+<var>&amp;{token}</var>
+</assign>
+<msg timestamp="20180523 16:00:07.459" level="INFO">&amp;{token} = { token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDcsImV4cCI6MTUyNzE1NzgwN30.kBUSeS9DhAmXVUgagNpp_zbP1yE6BailqDPwnqDQyec }</msg>
+<status status="PASS" endtime="20180523 16:00:07.459" starttime="20180523 16:00:07.457"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>docupload</arg>
+<arg>/users/profile/docupload</arg>
+<arg>headers=${token}</arg>
+<arg>files=${files}</arg>
+</arguments>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20180523 16:00:08.019" level="INFO">Post Request using : alias=docupload, uri=/users/profile/docupload, data=&lt;empty&gt;, headers={u'token': u'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDcsImV4cCI6MTUyNzE1NzgwN30.kBUSeS9DhAmXVUgagNpp_zbP1yE6BailqDPwnqDQyec'}, files={u'file': '{"info":{"companyDescridescription":"somthin","businessClassification":"somename","logo":"profile_documents/1526290445140.jpg","fbAccount":"fb.com","instagramAccount":"insta.com","twitterAccount":"te.com","accountType":"Consumer","eni":"321321321","atfLicenseNo":"321231231322133132","itarLicenseNo":"123121231","businessTaxLicenseNo":"54645465465465","fflLicenseUrl":"","atfLicenseUrl":"","businesstaxLicenseUrl":""},"userId":"100"}\n\n'}, allow_redirects=True </msg>
+<msg timestamp="20180523 16:00:08.020" level="INFO">${result} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20180523 16:00:08.020" starttime="20180523 16:00:07.460"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${result.status_code}</arg>
+<arg>${200}</arg>
+</arguments>
+<status status="PASS" endtime="20180523 16:00:08.022" starttime="20180523 16:00:08.021"></status>
+</kw>
+<tags>
+<tag>document upload</tag>
+</tags>
+<status status="PASS" endtime="20180523 16:00:08.022" critical="yes" starttime="20180523 16:00:06.909"></status>
+</test>
+<test id="s1-t10" name="Testing users profile">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20180523 16:00:08.024" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20180523 16:00:08.024" starttime="20180523 16:00:08.023"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>profile</arg>
+<arg>${url}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:08.025" level="INFO">Creating Session using : alias=profile, url=http://54.186.254.137:6060, headers={u'Content-Type': u'application/json'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20180523 16:00:08.026" starttime="20180523 16:00:08.025"></status>
+</kw>
+<kw name="Get token">
+<assign>
+<var>${gettoken}</var>
+</assign>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20180523 16:00:08.028" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20180523 16:00:08.028" starttime="20180523 16:00:08.027"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>login</arg>
+<arg>${url}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:08.029" level="INFO">Creating Session using : alias=login, url=http://54.186.254.137:6060, headers={u'Content-Type': u'application/json'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20180523 16:00:08.029" starttime="20180523 16:00:08.028"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>json.load(open("login.json", "r"))</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${object}</var>
+</assign>
+<msg timestamp="20180523 16:00:08.030" level="INFO">${object} = {u'userName': u'rc@r.com', u'password': u'!@#123QW'}</msg>
+<status status="PASS" endtime="20180523 16:00:08.030" starttime="20180523 16:00:08.030"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>login</arg>
+<arg>/users/login</arg>
+<arg>data=${object}</arg>
+</arguments>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20180523 16:00:08.548" level="INFO">Post Request using : alias=login, uri=/users/login, data=&lt;empty&gt;, headers=None, files=None, allow_redirects=True </msg>
+<msg timestamp="20180523 16:00:08.549" level="INFO">${result} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20180523 16:00:08.549" starttime="20180523 16:00:08.031"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${result.json()['token']}</arg>
+</arguments>
+<assign>
+<var>${token}</var>
+</assign>
+<msg timestamp="20180523 16:00:08.551" level="INFO">${token} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDgsImV4cCI6MTUyNzE1NzgwOH0.iOXMDl3gbvVH8v7T6OVU9O2kU5vvWqVUwhf0eKrcb7g</msg>
+<status status="PASS" endtime="20180523 16:00:08.551" starttime="20180523 16:00:08.549"></status>
+</kw>
+<msg timestamp="20180523 16:00:08.552" level="INFO">${gettoken} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDgsImV4cCI6MTUyNzE1NzgwOH0.iOXMDl3gbvVH8v7T6OVU9O2kU5vvWqVUwhf0eKrcb7g</msg>
+<status status="PASS" endtime="20180523 16:00:08.552" starttime="20180523 16:00:08.026"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>token=${gettoken}</arg>
+</arguments>
+<assign>
+<var>&amp;{token}</var>
+</assign>
+<msg timestamp="20180523 16:00:08.555" level="INFO">&amp;{token} = { token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDgsImV4cCI6MTUyNzE1NzgwOH0.iOXMDl3gbvVH8v7T6OVU9O2kU5vvWqVUwhf0eKrcb7g }</msg>
+<status status="PASS" endtime="20180523 16:00:08.555" starttime="20180523 16:00:08.553"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>json.load(open("profile.json", "r"))</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${object}</var>
+</assign>
+<msg timestamp="20180523 16:00:08.557" level="INFO">${object} = {u'info': {u'fflLicenseUrl': u'', u'businesstaxLicenseUrl': u'', u'atfLicenseUrl': u'', u'businessTaxLicenseNo': u'54645465465465', u'eni': u'321321321', u'itarLicenseNo': u'123121231', u'atfLicenseNo...</msg>
+<status status="PASS" endtime="20180523 16:00:08.557" starttime="20180523 16:00:08.556"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${object}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:08.558" level="INFO">{u'info': {u'fflLicenseUrl': u'', u'businesstaxLicenseUrl': u'', u'atfLicenseUrl': u'', u'businessTaxLicenseNo': u'54645465465465', u'eni': u'321321321', u'itarLicenseNo': u'123121231', u'atfLicenseNo': u'321231231322133132', u'businessClassification': u'somename', u'accountType': u'Consumer', u'instagramAccount': u'insta.com', u'twitterAccount': u'te.com', u'logo': u'profile_documents/1526290445140.jpg', u'fbAccount': u'fb.com', u'companyDescridescription': u'somthin'}, u'userId': u'100'}</msg>
+<status status="PASS" endtime="20180523 16:00:08.558" starttime="20180523 16:00:08.557"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>profile</arg>
+<arg>/users/profile</arg>
+<arg>headers=${token}</arg>
+<arg>data=${object}</arg>
+</arguments>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20180523 16:00:09.080" level="INFO">Post Request using : alias=profile, uri=/users/profile, data=&lt;empty&gt;, headers={u'token': u'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDgsImV4cCI6MTUyNzE1NzgwOH0.iOXMDl3gbvVH8v7T6OVU9O2kU5vvWqVUwhf0eKrcb7g'}, files=None, allow_redirects=True </msg>
+<msg timestamp="20180523 16:00:09.080" level="INFO">${result} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20180523 16:00:09.080" starttime="20180523 16:00:08.559"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${result.json()}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:09.082" level="INFO">{u'status': True, u'msg': u'success'}</msg>
+<status status="PASS" endtime="20180523 16:00:09.082" starttime="20180523 16:00:09.081"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${result.status_code}</arg>
+<arg>${200}</arg>
+</arguments>
+<status status="PASS" endtime="20180523 16:00:09.084" starttime="20180523 16:00:09.083"></status>
+</kw>
+<tags>
+<tag>profile</tag>
+</tags>
+<status status="PASS" endtime="20180523 16:00:09.085" critical="yes" starttime="20180523 16:00:08.022"></status>
+</test>
+<test id="s1-t11" name="Testing users profile company">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20180523 16:00:09.089" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20180523 16:00:09.089" starttime="20180523 16:00:09.087"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>company</arg>
+<arg>${url}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:09.091" level="INFO">Creating Session using : alias=company, url=http://54.186.254.137:6060, headers={u'Content-Type': u'application/json'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20180523 16:00:09.092" starttime="20180523 16:00:09.090"></status>
+</kw>
+<kw name="Get token">
+<assign>
+<var>${gettoken}</var>
+</assign>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20180523 16:00:09.094" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20180523 16:00:09.094" starttime="20180523 16:00:09.093"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>login</arg>
+<arg>${url}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:09.094" level="INFO">Creating Session using : alias=login, url=http://54.186.254.137:6060, headers={u'Content-Type': u'application/json'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20180523 16:00:09.095" starttime="20180523 16:00:09.094"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>json.load(open("login.json", "r"))</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${object}</var>
+</assign>
+<msg timestamp="20180523 16:00:09.096" level="INFO">${object} = {u'userName': u'rc@r.com', u'password': u'!@#123QW'}</msg>
+<status status="PASS" endtime="20180523 16:00:09.096" starttime="20180523 16:00:09.095"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>login</arg>
+<arg>/users/login</arg>
+<arg>data=${object}</arg>
+</arguments>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20180523 16:00:09.619" level="INFO">Post Request using : alias=login, uri=/users/login, data=&lt;empty&gt;, headers=None, files=None, allow_redirects=True </msg>
+<msg timestamp="20180523 16:00:09.619" level="INFO">${result} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20180523 16:00:09.619" starttime="20180523 16:00:09.096"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${result.json()['token']}</arg>
+</arguments>
+<assign>
+<var>${token}</var>
+</assign>
+<msg timestamp="20180523 16:00:09.620" level="INFO">${token} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDksImV4cCI6MTUyNzE1NzgwOX0.hWGNEzbc-FoP0dqzZ1wp50A87e8W7LB4S3Uqydirccs</msg>
+<status status="PASS" endtime="20180523 16:00:09.620" starttime="20180523 16:00:09.619"></status>
+</kw>
+<msg timestamp="20180523 16:00:09.620" level="INFO">${gettoken} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDksImV4cCI6MTUyNzE1NzgwOX0.hWGNEzbc-FoP0dqzZ1wp50A87e8W7LB4S3Uqydirccs</msg>
+<status status="PASS" endtime="20180523 16:00:09.621" starttime="20180523 16:00:09.092"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>token=${gettoken}</arg>
+</arguments>
+<assign>
+<var>&amp;{token}</var>
+</assign>
+<msg timestamp="20180523 16:00:09.622" level="INFO">&amp;{token} = { token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDksImV4cCI6MTUyNzE1NzgwOX0.hWGNEzbc-FoP0dqzZ1wp50A87e8W7LB4S3Uqydirccs }</msg>
+<status status="PASS" endtime="20180523 16:00:09.622" starttime="20180523 16:00:09.621"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>json.load(open("company.json", "r"))</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${object}</var>
+</assign>
+<msg timestamp="20180523 16:00:09.635" level="INFO">${object} = {u'info': {u'doingBusinessAsName': u'HONEYWELL', u'corporateStructureDescription': u'some dewscription', u'mailingAddress': {u'City': u'', u'stateorProvince': u'NY', u'Zip': u'14623', u'Line1': u'20 W...</msg>
+<status status="PASS" endtime="20180523 16:00:09.635" starttime="20180523 16:00:09.622"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${object}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:09.637" level="INFO">{u'info': {u'doingBusinessAsName': u'HONEYWELL', u'corporateStructureDescription': u'some dewscription', u'mailingAddress': {u'City': u'', u'stateorProvince': u'NY', u'Zip': u'14623', u'Line1': u'20 Wildbriar Road', u'Country': u'USA'}, u'duns': u'063603955', u'expirationDate': u'2019-04-18T00:00:00.000Z', u'pscCodes': [u'1231321'], u'cage': u'4P211', u'legalBusinessName': u'HONEYWELL INTERNATIONAL INC.'}, u'userId': u'100'}</msg>
+<status status="PASS" endtime="20180523 16:00:09.637" starttime="20180523 16:00:09.636"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>company</arg>
+<arg>/users/Profile/company</arg>
+<arg>headers=${token}</arg>
+<arg>data=${object}</arg>
+</arguments>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20180523 16:00:10.193" level="INFO">Post Request using : alias=company, uri=/users/Profile/company, data=&lt;empty&gt;, headers={u'token': u'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MDksImV4cCI6MTUyNzE1NzgwOX0.hWGNEzbc-FoP0dqzZ1wp50A87e8W7LB4S3Uqydirccs'}, files=None, allow_redirects=True </msg>
+<msg timestamp="20180523 16:00:10.193" level="INFO">${result} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20180523 16:00:10.194" starttime="20180523 16:00:09.637"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${result.json()}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:10.195" level="INFO">{u'status': True, u'msg': u'success'}</msg>
+<status status="PASS" endtime="20180523 16:00:10.196" starttime="20180523 16:00:10.194"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${result.status_code}</arg>
+<arg>${200}</arg>
+</arguments>
+<status status="PASS" endtime="20180523 16:00:10.198" starttime="20180523 16:00:10.196"></status>
+</kw>
+<tags>
+<tag>company</tag>
+</tags>
+<status status="PASS" endtime="20180523 16:00:10.198" critical="yes" starttime="20180523 16:00:09.086"></status>
+</test>
+<test id="s1-t12" name="Testing users profile token">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20180523 16:00:10.202" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20180523 16:00:10.203" starttime="20180523 16:00:10.201"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>token</arg>
+<arg>${url}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:10.204" level="INFO">Creating Session using : alias=token, url=http://54.186.254.137:6060, headers={u'Content-Type': u'application/json'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20180523 16:00:10.205" starttime="20180523 16:00:10.203"></status>
+</kw>
+<kw name="Get token">
+<assign>
+<var>${gettoken}</var>
+</assign>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20180523 16:00:10.207" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20180523 16:00:10.207" starttime="20180523 16:00:10.206"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>login</arg>
+<arg>${url}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:10.207" level="INFO">Creating Session using : alias=login, url=http://54.186.254.137:6060, headers={u'Content-Type': u'application/json'},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20180523 16:00:10.208" starttime="20180523 16:00:10.207"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>json.load(open("login.json", "r"))</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${object}</var>
+</assign>
+<msg timestamp="20180523 16:00:10.208" level="INFO">${object} = {u'userName': u'rc@r.com', u'password': u'!@#123QW'}</msg>
+<status status="PASS" endtime="20180523 16:00:10.209" starttime="20180523 16:00:10.208"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>login</arg>
+<arg>/users/login</arg>
+<arg>data=${object}</arg>
+</arguments>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20180523 16:00:10.726" level="INFO">Post Request using : alias=login, uri=/users/login, data=&lt;empty&gt;, headers=None, files=None, allow_redirects=True </msg>
+<msg timestamp="20180523 16:00:10.726" level="INFO">${result} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20180523 16:00:10.727" starttime="20180523 16:00:10.209"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${result.json()['token']}</arg>
+</arguments>
+<assign>
+<var>${token}</var>
+</assign>
+<msg timestamp="20180523 16:00:10.728" level="INFO">${token} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MTAsImV4cCI6MTUyNzE1NzgxMH0.yjkdanm4HsVJpcv6Caecaj59piJ6_9blgX00fxQynb8</msg>
+<status status="PASS" endtime="20180523 16:00:10.728" starttime="20180523 16:00:10.727"></status>
+</kw>
+<msg timestamp="20180523 16:00:10.729" level="INFO">${gettoken} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MTAsImV4cCI6MTUyNzE1NzgxMH0.yjkdanm4HsVJpcv6Caecaj59piJ6_9blgX00fxQynb8</msg>
+<status status="PASS" endtime="20180523 16:00:10.729" starttime="20180523 16:00:10.205"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>token=${gettoken}</arg>
+</arguments>
+<assign>
+<var>&amp;{token}</var>
+</assign>
+<msg timestamp="20180523 16:00:10.731" level="INFO">&amp;{token} = { token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MTAsImV4cCI6MTUyNzE1NzgxMH0.yjkdanm4HsVJpcv6Caecaj59piJ6_9blgX00fxQynb8 }</msg>
+<status status="PASS" endtime="20180523 16:00:10.731" starttime="20180523 16:00:10.729"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>json.load(open("token.json", "r"))</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${object}</var>
+</assign>
+<msg timestamp="20180523 16:00:10.732" level="INFO">${object} = {u'userId': u'106', u'zervPlatformAddress': u'0x0jhihu008yr3rh3uh939uhfbu', u'etherPlatformAddress': u'0x0ujnjh6565hbjhb'}</msg>
+<status status="PASS" endtime="20180523 16:00:10.732" starttime="20180523 16:00:10.731"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${object}</arg>
+</arguments>
+<msg timestamp="20180523 16:00:10.734" level="INFO">{u'userId': u'106', u'zervPlatformAddress': u'0x0jhihu008yr3rh3uh939uhfbu', u'etherPlatformAddress': u'0x0ujnjh6565hbjhb'}</msg>
+<status status="PASS" endtime="20180523 16:00:10.734" starttime="20180523 16:00:10.733"></status>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<doc>Send a PUT request on the session object found using the</doc>
+<arguments>
+<arg>token</arg>
+<arg>/users/profile/token</arg>
+<arg>headers=${token}</arg>
+<arg>data=${object}</arg>
+</arguments>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20180523 16:00:11.252" level="INFO">Put Request using : alias=token, uri=/users/profile/token, data={"userId": "106", "zervPlatformAddress": "0x0jhihu008yr3rh3uh939uhfbu", "etherPlatformAddress": "0x0ujnjh6565hbjhb"},                     headers={u'token': u'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXIiLCJpYXQiOjE1MjcwNzE0MTAsImV4cCI6MTUyNzE1NzgxMH0.yjkdanm4HsVJpcv6Caecaj59piJ6_9blgX00fxQynb8'}, allow_redirects=True </msg>
+<msg timestamp="20180523 16:00:11.252" level="INFO">${result} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20180523 16:00:11.252" starttime="20180523 16:00:10.735"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${result.json()}</arg>
+</arguments>
+<status status="PASS" endtime="20180523 16:00:11.254" starttime="20180523 16:00:11.253"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${result.status_code}</arg>
+<arg>${200}</arg>
+</arguments>
+<status status="PASS" endtime="20180523 16:00:11.256" starttime="20180523 16:00:11.255"></status>
+</kw>
+<tags>
+<tag>token</tag>
+</tags>
+<status status="PASS" endtime="20180523 16:00:11.257" critical="yes" starttime="20180523 16:00:10.199"></status>
+</test>
+<status status="FAIL" endtime="20180523 16:00:11.263" starttime="20180523 15:59:58.737"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="2" pass="10">Critical Tests</stat>
+<stat fail="2" pass="10">All Tests</stat>
+</total>
+<tag>
+<stat fail="0" pass="1">company</stat>
+<stat fail="0" pass="1">document upload</stat>
+<stat fail="0" pass="1">get account</stat>
+<stat fail="1" pass="0">intake</stat>
+<stat fail="1" pass="0">mfa</stat>
+<stat fail="0" pass="1">profile</stat>
+<stat fail="0" pass="1">profile details</stat>
+<stat fail="0" pass="1">profile intrest</stat>
+<stat fail="0" pass="1">token</stat>
+<stat fail="0" pass="1">update account</stat>
+<stat fail="0" pass="1">users account</stat>
+<stat fail="0" pass="1">users login</stat>
+</tag>
+<suite>
+<stat fail="2" id="s1" name="Onboarding" pass="10">Onboarding</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
