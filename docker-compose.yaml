@@ -5,7 +5,7 @@ services:
  onboarding:
   build: .
   environment:
-  - mongodb://mongo:27017/CRDB02
+  - mongodb://mongo:27017/CRDB
   ports:
   - "7360:6060"
   depends_on:
